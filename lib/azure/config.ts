@@ -1,0 +1,17 @@
+import { z } from 'zod';
+
+const configSchema = z.object({
+  AZURE_STORAGE_CONNECTION_STRING: z.string(),
+  AZURE_STORAGE_CONTAINER_NAME: z.string(),
+  AZURE_OPENAI_API_KEY: z.string(),
+  AZURE_OPENAI_ENDPOINT: z.string(),
+  AZURE_OPENAI_DEPLOYMENT_NAME: z.string(),
+});
+
+export const config = configSchema.parse({
+  AZURE_STORAGE_CONNECTION_STRING: process.env.AZURE_STORAGE_CONNECTION_STRING,
+  AZURE_STORAGE_CONTAINER_NAME: process.env.AZURE_STORAGE_CONTAINER_NAME || 'documents',
+  AZURE_OPENAI_API_KEY: process.env.AZURE_OPENAI_API_KEY,
+  AZURE_OPENAI_ENDPOINT: process.env.AZURE_OPENAI_ENDPOINT,
+  AZURE_OPENAI_DEPLOYMENT_NAME: process.env.AZURE_OPENAI_DEPLOYMENT_NAME,
+});
